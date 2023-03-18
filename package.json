@@ -3,7 +3,8 @@
     "colors": "^1.4.0",
     "common-tags": "^1.8.2",
     "discord.js": "^14.6.0",
-    "mongoose": "^6.8.0"
+    "mongoose": "^6.8.0",
+    "ms": "^2.1.3"
   },
   "name": "discordjs-v14-handler",
   "version": "1.0.0",
@@ -17,7 +18,6 @@
   "author": "FlameFace#0570",
   "license": "ISC",
   "description": "An Advanced Giveaway Bot to match most of your requirements. This bot contains insane features like multiplies, requirements, custom options and many more. Giveaway system is also compatible to survive Bot crash/restart.",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Elitex07/GiveawayBot.git"
