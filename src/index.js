@@ -22,7 +22,7 @@ const client = new Client({
     ]
 });
 
-if(!config.MONGODB) {
+if (!config.MONGODB) {
     console.log("[WARN] MongoDB URL is required! put your MongoDB URI in config file".yellow.bold + "\n")
     return process.exit();
 }
@@ -54,6 +54,6 @@ client.login(config.TOKEN)
     })
 
 process.on("unhandledRejection", async (err) => {
-    if(err.code == 10008 || err.code == 10062) return;
-    console.log(`[ANTI - CRUSH] Unhandled Rejection : ${err}`.red.bold)
+    if (err.code == 10008 || err.code == 10062) return;
+    console.log(`[ANTI - CRUSH] Unhandled Rejection : ${err.stack}`.red.bold)
 })
