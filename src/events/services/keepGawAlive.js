@@ -79,7 +79,7 @@ i.save();
             let winners = [];
             let no = Number(i.winCount) || 1;
             try{
-                for (let i = 0; i < no && list?.length != 0; i++){
+                for (let a = 0; a < no && list?.length != 0; a++){
                     let rid = list[Math.floor(Math.random() * list?.length)];
                     if(winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
                     else winnerId = winnerId + `, <@${rid}>`;
@@ -184,7 +184,7 @@ i.save();
                 let winners = [];
                 let no = Number(i.winCount) || 1;
                 try{
-                    for (let i = 0; i < no && list?.length != 0; i++){
+                    for (let a = 0; a < no && list?.length != 0; a++){
                         let rid = list[Math.floor(Math.random() * list?.length)];
                         if(winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
                         else winnerId = winnerId + `, <@${rid}>`;
