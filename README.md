@@ -9,6 +9,9 @@ An Advanced Giveaway Bot to match most of your requirements. This bot contains i
 ## Used in Production By
 
 This project is used by the following bot [Raiden Bot](https://raidenbot.xyz)
+
+Please note that the code in this repository is NOT intended to be hosted. These files are here to help you understand how the bot works in general, not how to launch it on your own machine. We are sorry but we will not be able to help you to install the bot on your own server and we are sorry if you wasted your time trying before coming across this message.
+
 ## Acknowledgements
 
  - [DiscordJS Package](https://github.com/discordjs/discord.js)
