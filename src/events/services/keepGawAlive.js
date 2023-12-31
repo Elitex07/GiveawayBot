@@ -60,17 +60,6 @@ async function gaw(client) {
             if (!msg) return;
 
             if (!i.entries || i.entries?.length == 0) {
-                //                 await msg.edit({
-                //                     components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setDescription(`
-                // ${emoji.point} **Giveaway Details**
-                // ${emoji.blankspace}${emoji.replyc} Prize: **${i.prize}**
-                // ${emoji.blankspace}${emoji.replyc} Winners: 
-                // ${emoji.blankspace}${emoji.replyc} Host: <@${i.host}> ${i.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${i.entrylimit} Entries` : ``}
-                // ${emoji.blankspace}${emoji.reply} Ends: Giveaway Cancelled
-                // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-                // `).setFooter({ text: 'Giveaway has been cancelled due to no participation' })]
-                //                 });
                 await msg.edit({
                     components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: i.prize, host: i.host, entriesLimit: i.entrylimit, multi: desc, requirements: desc2 }, "noEntries")]
                 });
@@ -82,24 +71,6 @@ async function gaw(client) {
 
             // Drawing winner(s)
             let list = i.entries;
-            // var winnerId = ``;
-            // let winners = [];
-            // try {
-            //     for (let i = 0; i < no && list?.length != 0; i++) {
-            //         let rid = list[Math.floor(Math.random() * list?.length)];
-            //         if (winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
-            //         else winnerId = winnerId + `, <@${rid}>`;
-
-            //         winners.push(rid);
-            //         i.winners.push(rid);
-
-            //         let r = [];
-            //         list.forEach(x => {
-            //             if (x != rid) r.push(x)
-            //         });
-            //         list = r;
-            //     };
-            // } catch (error) { };
             const rolledData = roll(list, Number(i.winCount) || 1)
             list = rolledData.entries
             i.winners.push(...rolledData.winners)
@@ -110,18 +81,6 @@ async function gaw(client) {
                     await guild.members.cache.get(i).roles.add(role, 'Giveaway Winner Role').catch(e => null);
                 }
             });
-
-            //             await msg.edit({
-            //                 components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setFooter({ text: `Giveaway has been ended.` }).setDescription(`
-            // ${emoji.point} **Giveaway Details**
-            // ${emoji.blankspace}${emoji.replyc} Prize: **${i.prize}**
-            // ${emoji.blankspace}${emoji.replyc} Winners: ${winnerId.length != 0 ? winnerId : '\`Error came\` :skull:'}
-            // ${emoji.blankspace}${emoji.replyc} Host: <@${i.host}> ${i.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${i.entrylimit} Entries` : ``}
-            // ${emoji.blankspace}${emoji.reply} Ends: <t:${((Date.now()) / 1000).toFixed(0)}>  [<t:${((Date.now()) / 1000).toFixed(0)}:R>]
-            // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-            // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-            // `)]
-            //             });
             await msg.edit({
                 components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: i.prize, winners: rolledData.winnerId, host: i.host, entriesLimit: i.entrylimit, multi: desc, requirements: desc2 }, "End")]
             });
@@ -177,18 +136,6 @@ async function gaw(client) {
                 if (!msg) return;
 
                 if (!i.entries || i.entries?.length == 0) {
-                    //                     await msg.edit({
-                    //                         components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setDescription(`
-                    // ${emoji.point} **Giveaway Details**
-                    // ${emoji.blankspace}${emoji.replyc} Prize: **${i.prize}**
-                    // ${emoji.blankspace}${emoji.replyc} Winners: 
-                    // ${emoji.blankspace}${emoji.replyc} Host: <@${i.host}> ${i.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${i.entrylimit} Entries` : ``}
-                    // ${emoji.blankspace}${emoji.reply} Ends: Giveaway Cancelled
-                    // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                    // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-                    // `).setFooter({ text: 'Giveaway has been cancelled due to no participation' })]
-                    //                     });
-
                     await msg.edit({
                         components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: i.prize, host: i.host, entriesLimit: i.entrylimit, multi: desc, requirements: desc2 }, "noEntries")]
                     });
@@ -200,25 +147,6 @@ async function gaw(client) {
 
                 // Drawing winner(s)
                 let list = i.entries;
-                // var winnerId = ``;
-                // let winners = [];
-                // let no = Number(i.winCount) || 1;
-                // try {
-                //     for (let i = 0; i < no && list?.length != 0; i++) {
-                //         let rid = list[Math.floor(Math.random() * list?.length)];
-                //         if (winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
-                //         else winnerId = winnerId + `, <@${rid}>`;
-
-                //         winners.push(rid);
-                //         i.winners.push(rid);
-
-                //         let r = [];
-                //         list.forEach(x => {
-                //             if (x != rid) r.push(x)
-                //         });
-                //         list = r;
-                //     };
-                // } catch (error) { };
 
                 const rolledData = roll(list, Number(i.winCount) || 1)
                 list = rolledData.entries
@@ -230,18 +158,6 @@ async function gaw(client) {
                         await guild.members.cache.get(i).roles.add(role, 'Giveaway Winner Role').catch(e => null);
                     }
                 });
-
-                //                 await msg.edit({
-                //                     components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setFooter({ text: `Giveaway has been ended.` }).setDescription(`
-                // ${emoji.point} **Giveaway Details**
-                // ${emoji.blankspace}${emoji.replyc} Prize: **${i.prize}**
-                // ${emoji.blankspace}${emoji.replyc} Winners: ${winnerId.length != 0 ? winnerId : '\`Error came\` :skull:'}
-                // ${emoji.blankspace}${emoji.replyc} Host: <@${i.host}> ${i.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${i.entrylimit} Entries` : ``}
-                // ${emoji.blankspace}${emoji.reply} Ends: <t:${((Date.now()) / 1000).toFixed(0)}>  [<t:${((Date.now()) / 1000).toFixed(0)}:R>]
-                // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-                // `)]
-                //                 });
                 await msg.edit({
                     components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: i.prize, winners: rolledData.winnerId, host: i.host, entriesLimit: i.entrylimit, multi: desc, requirements: desc2 }, "End")]
                 });

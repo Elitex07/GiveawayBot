@@ -1,4 +1,3 @@
-
 module.exports = function roll(entries, winnerCount) {
     let winnerId = ``
     let winners = []

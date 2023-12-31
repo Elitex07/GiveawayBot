@@ -939,16 +939,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
                         if (!msg) return;
 
                         if (!entry.entries || entry.entries?.length == 0) {
-                            //                     await msg.edit({components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setDescription(`
-                            // ${emoji.point} **Giveaway Details**
-                            // ${emoji.blankspace}${emoji.replyc} Prize: **${entry.prize}**
-                            // ${emoji.blankspace}${emoji.replyc} Winners: 
-                            // ${emoji.blankspace}${emoji.replyc} Host: <@${entry.host}> ${entry.entrylimit != 'infinite'?`\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${entry.entrylimit} Entries`:``}
-                            // ${emoji.blankspace}${emoji.reply} Ends: Giveaway Cancelled
-                            // ${desc.length == 0?``:`\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                            // ${desc2.length == 0?``:`${emoji.point} **Requirements**\n`.concat(desc2)}
-                            // `).setFooter({text: 'Giveaway has been cancelled due to no participation'})]});
-
                             await msg.edit({ components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: entry.prize, host: entry.host, entriesLimit: entry.entrylimit, multi: desc, requirements: desc2 }, "noEntries")] });
                             entry.status = false;
                             entry.save();
@@ -957,25 +947,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
 
                         // Drawing winner(s)
                         let list = entry.entries;
-                        // var winnerId = ``;
-                        // let winners = [];
-                        // let no = Number(entry.winCount) || 1;
-                        // try{
-                        //     for (let i = 0; i < no && list?.length != 0; i++){
-                        //         let rid = list[Math.floor(Math.random() * list?.length)];
-                        //         if(winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
-                        //         else winnerId = winnerId + `, <@${rid}>`;
-
-                        //         winners.push(rid);
-                        //         entry.winners.push(rid);
-
-                        //         let r = [];
-                        //         list.forEach(x => {
-                        //             if(x != rid) r.push(x)
-                        //         });
-                        //         list = r;
-                        //     };
-                        // } catch (error){};
                         const rolledData = roll(list, Number(entry.winCount) || 1)
                         list = rolledData.entries
                         entry.winners.push(...rolledData.winners)
@@ -988,16 +959,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
                                 await interaction.guild.members.cache.get(i).roles.add(role, 'Giveaway Winner Role').catch(e => null);
                             }
                         });
-
-                        //                 await msg.edit({components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setFooter({text:`Giveaway has been ended.`}).setDescription(`
-                        // ${emoji.point} **Giveaway Details**
-                        // ${emoji.blankspace}${emoji.replyc} Prize: **${entry.prize}**
-                        // ${emoji.blankspace}${emoji.replyc} Winners: ${winnerId.length != 0?winnerId:'\`Error came\` :skull:'}
-                        // ${emoji.blankspace}${emoji.replyc} Host: <@${entry.host}> ${entry.entrylimit != 'infinite'?`\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${entry.entrylimit} Entries`:``}
-                        // ${emoji.blankspace}${emoji.reply} Ends: <t:${((Date.now())/1000).toFixed(0)}>  [<t:${((Date.now())/1000).toFixed(0)}:R>]
-                        // ${desc.length == 0?``:`\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                        // ${desc2.length == 0?``:`${emoji.point} **Requirements**\n`.concat(desc2)}
-                        // `)]});
                         await msg.edit({ components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: entry.prize, winners: rolledData.winnerId, host: entry.host, entriesLimit: entry.entrylimit, multi: desc, requirements: desc2 }, "End")] });
 
                         entry.status = false;
@@ -1062,18 +1023,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
             }
             if (!entry.entries || entry.entries?.length == 0) {
                 await interaction.deleteReply().catch(e => null);
-
-                //                 await msg.edit({
-                //                     components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setDescription(`
-                // ${emoji.point} **Giveaway Details**
-                // ${emoji.blankspace}${emoji.replyc} Prize: **${entry.prize}**
-                // ${emoji.blankspace}${emoji.replyc} Winners: 
-                // ${emoji.blankspace}${emoji.replyc} Host: <@${entry.host}> ${entry.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${entry.entrylimit} Entries` : ``}
-                // ${emoji.blankspace}${emoji.reply} Ends: Giveaway Cancelled
-                // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-                // `).setFooter({ text: 'Giveaway has been cancelled due to no participation' })]
-                //                 });
                 await msg.edit({
                     components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: entry.prize, host: entry.host, entriesLimit: entry.entrylimit, multi: desc, requirements: desc2 }, "noEntries")]
                 });
@@ -1084,25 +1033,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
 
             // Drawing winner(s)
             let list = entry.entries;
-            // var winnerId = ``;
-            // let winners = [];
-            // let no = Number(entry.winCount) || 1;
-            // try {
-            //     for (let i = 0; i < no && list?.length != 0; i++) {
-            //         let rid = list[Math.floor(Math.random() * list?.length)];
-            //         if (winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
-            //         else winnerId = winnerId + `, <@${rid}>`;
-
-            //         winners.push(rid);
-            //         entry.winners.push(rid);
-
-            //         let r = [];
-            //         list.forEach(x => {
-            //             if (x != rid) r.push(x)
-            //         });
-            //         list = r;
-            //     };
-            // } catch (error) { };
             const rolledData = roll(list, Number(entry.winCount) || 1)
             list = rolledData.entries
             entry.winners.push(...rolledData.winners)
@@ -1114,18 +1044,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
                     await interaction.guild.members.cache.get(i).roles.add(role, 'Giveaway Winner Role').catch(e => null);
                 }
             });
-
-            //             await msg.edit({
-            //                 components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setFooter({ text: `Giveaway has been ended.` }).setDescription(`
-            // **Giveaway Details**
-            // ${emoji.blankspace}${emoji.replyc} Prize: **${entry.prize}**
-            // ${emoji.blankspace}${emoji.replyc} Winners: ${winnerId.length != 0 ? winnerId : '\`Error came\` :skull:'}
-            // ${emoji.blankspace}${emoji.replyc} Host: <@${entry.host}> ${entry.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${entry.entrylimit} Entries` : ``}
-            // ${emoji.blankspace}${emoji.reply} Ends: <t:${((Date.now()) / 1000).toFixed(0)}>  [<t:${((Date.now()) / 1000).toFixed(0)}:R>]
-            // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-            // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-            // `)]
-            //             });
             await msg.edit({
                 components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: entry.prize, winners: rolledData.winnerId, host: entry.host, entriesLimit: entry.entrylimit, multi: desc, requirements: desc2 }, "End")]
             });
@@ -1201,25 +1119,6 @@ ${desc2.length == 0 ? `${emoji.blankspace}${emoji.reply} No Requirements has bee
 
             // Drawing winner(s)
             let list = entry.entries.filter(nik => !entry.winners.includes(nik));
-            // var winnerId = ``;
-            // let winners = [];
-            // let no = Number(entry.winCount) || 1;
-            // try {
-            //     for (let i = 0; i < no && list?.length != 0; i++) {
-            //         let rid = list[Math.floor(Math.random() * list?.length)];
-            //         if (winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
-            //         else winnerId = winnerId + `, <@${rid}>`;
-
-            //         winners.push(rid);
-            //         entry.winners.push(rid);
-
-            //         let r = [];
-            //         list.forEach(x => {
-            //             if (x != rid) r.push(x)
-            //         });
-            //         list = r;
-            //     };
-            // } catch (error) { };
             const rolledData = roll(list, Number(entry.winCount) || 1)
             list = rolledData.entries
             entry.winners.push(...rolledData.winners)
@@ -1431,17 +1330,6 @@ ${emoji.blankspace}${emoji.reply} Ends: <t:${((entry.endtime) / 1000).toFixed(0)
                 if (!msg) return;
 
                 if (!entry.entries || entry.entries?.length == 0) {
-                    //                     await msg.edit({
-                    //                         components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setDescription(`
-                    // ${emoji.point} **Giveaway Details**
-                    // ${emoji.blankspace}${emoji.replyc} Prize: **${entry.prize}**
-                    // ${emoji.blankspace}${emoji.replyc} Winners: 
-                    // ${emoji.blankspace}${emoji.replyc} Host: <@${entry.host}> ${entry.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${entry.entrylimit} Entries` : ``}
-                    // ${emoji.blankspace}${emoji.reply} Ends: Giveaway Cancelled
-                    // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                    // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-                    // `).setFooter({ text: 'Giveaway has been cancelled due to no participation' })]
-                    //                     });
                     await msg.edit({
                         components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: entry.prize, host: entry.host, entriesLimit: entry.entrylimit, multi: desc, requirements: desc2 }, "noEntries")]
                     });
@@ -1453,25 +1341,6 @@ ${emoji.blankspace}${emoji.reply} Ends: <t:${((entry.endtime) / 1000).toFixed(0)
 
                 // Drawing winner(s)
                 let list = entry.entries;
-                // var winnerId = ``;
-                // let winners = [];
-                // let no = Number(entry.winCount) || 1;
-                // try {
-                //     for (let i = 0; i < no && list?.length != 0; i++) {
-                //         let rid = list[Math.floor(Math.random() * list?.length)];
-                //         if (winnerId.length == 0) winnerId = winnerId + `<@${rid}>`;
-                //         else winnerId = winnerId + `, <@${rid}>`;
-
-                //         winners.push(rid);
-                //         entry.winners.push(rid);
-
-                //         let r = [];
-                //         list.forEach(x => {
-                //             if (x != rid) r.push(x)
-                //         });
-                //         list = r;
-                //     };
-                // } catch (error) { };
 
                 const rolledData = roll(list, Number(entry.winCount) || 1)
                 list = rolledData.entries
@@ -1484,18 +1353,6 @@ ${emoji.blankspace}${emoji.reply} Ends: <t:${((entry.endtime) / 1000).toFixed(0)
                         await interaction.guild.members.cache.get(i).roles.add(role, 'Giveaway Winner Role').catch(e => null);
                     }
                 });
-
-                //                 await msg.edit({
-                //                     components: [], embeds: [new EmbedBuilder(msg.embeds[0].data).setFooter({ text: `Giveaway has been ended.` }).setDescription(`
-                // ${emoji.point} **Giveaway Details**
-                // ${emoji.blankspace}${emoji.replyc} Prize: **${entry.prize}**
-                // ${emoji.blankspace}${emoji.replyc} Winners: ${winnerId.length != 0 ? winnerId : '\`Error came\` :skull:'}
-                // ${emoji.blankspace}${emoji.replyc} Host: <@${entry.host}> ${entry.entrylimit != 'infinite' ? `\n${emoji.blankspace}${emoji.replyc} Entry stopped at ${entry.entrylimit} Entries` : ``}
-                // ${emoji.blankspace}${emoji.reply} Ends: <t:${((Date.now()) / 1000).toFixed(0)}>  [<t:${((Date.now()) / 1000).toFixed(0)}:R>]
-                // ${desc.length == 0 ? `` : `\n${emoji.point} **Multiplier**\n`.concat(desc)}
-                // ${desc2.length == 0 ? `` : `${emoji.point} **Requirements**\n`.concat(desc2)}
-                // `)]
-                //                 });
                 await msg.edit({
                     components: [], embeds: [generateGawEmbed(msg.embeds[0].data, { prize: entry.prize, winners: rolledData.winnerId, host: entry.host, entriesLimit: entry.entrylimit, multi: desc, requirements: desc2 }, "End")]
                 });
